@@ -1,0 +1,29 @@
+class HashTable:
+    def __init__(self,size):
+        self.size = size
+        self.arr = [[] for i in range(self.size)]
+
+    def hashing(self,key):
+        hash = 0
+        for i in key:
+            hash+=ord(i) #char to ascii
+        return hash % self.size
+          
+    def __getitem__(self,key):
+        index = self.hashing(key)
+        # print(index)
+        return self.arr[index]
+          
+    def __setitem__(self,key,value):
+        index = self.hashing(key)
+        # print(index)
+        if(self.arr[index]==[]):
+          self.arr[index].append((key,value))
+          return
+        elif(key in self.arr[index]):
+          return
+        while(self.arr[index] and index<=self.size):
+          if(index==self.size):
+            index=-1
+          index+=1
+        self.arr[index].append((key,value))
