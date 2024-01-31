@@ -1,0 +1,49 @@
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+class Binary_Search_tree:
+    def insert(self,node,data):
+        if node is None:
+            return Node(data)
+        if (data < node.data):
+            node.left = self.insert(node.left,data)
+        else:
+            node.right = self.insert(node.right,data)
+        return node
+
+    def in_order_display(self,root):
+        if root is not None:
+            # left
+            self.in_order_display(root.left)
+            # root
+            print(root.data)
+            # right
+            self.in_order_display(root.right)
+
+    def pre_order_display(self,root):
+       if root is not None:
+          # root
+          print(root.data)
+          # left
+          self.pre_order_display(root.left)
+          # right
+          self.pre_order_display(root.right)
+
+    def post_order_display(self,root):
+        if root is not None:
+          # left
+          self.post_order_display(root.left)
+          # right
+          self.pre_order_display(root.right)
+          # root
+          print(root.data)
+
+    def search(self,node,data):
+        if node is None or node.data == data:
+            return node
+        if data < node.data:
+            return self.search(node.left, data)
+        return self.search(node.right, data)
