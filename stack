@@ -1,0 +1,42 @@
+class E:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None
+
+class Stack:
+    def __init__(self):
+        self.top = None
+
+    def Push(self, data):
+        ne = E(data)
+        if self.top is None:
+            self.top = ne
+        else:
+            ne.next = self.top
+            self.top.prev = ne
+            self.top = ne
+
+    def Pop(self):
+        if self.top ==None:
+          print('No elements to remove in stack')
+          return None
+
+        data = self.top.data
+        if self.top.next:
+          self.top = self.top.next
+          self.top.prev = None
+        else:
+          self.top = None
+
+        return data
+
+
+    def display(self):
+        if self.top is None:
+            print("Stack is empty.")
+        else:
+            temp = self.top
+            while temp:
+                print(temp.data)
+                temp = temp.next
