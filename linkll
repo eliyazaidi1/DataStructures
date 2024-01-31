@@ -1,0 +1,110 @@
+class Node:
+    def __init__(self,data):
+      self.data = data
+      self.next = None
+      self.prev = None
+
+class Dll:
+    def __init__(self):
+      self.head = None
+      self.tail = None
+
+    def displayy(self):
+      if self.head==None:
+        print('Dll is Empty')
+      else:
+        temp = self.head
+        while(temp):
+           print(temp.data)
+           temp = temp.next
+
+    def insert_at_endd(self,data):
+        ne = Node(data)
+        if self.head==None:
+          # print('Dll is empty')
+          self.head = ne
+          self.tail = ne
+        else:
+          ne.prev = self.tail
+          self.tail.next = ne
+          self.tail = ne
+
+    def insert_at_beginn(self,data):
+       nb = Node(data)
+       if self.head==None:
+         self.head = nb
+         self.tail = nb
+       else:
+        nb.next = self.head
+        self.head.prev = nb
+        self.head = nb
+
+    def insert_at_poss(self,data,pos):
+       np = Node(data)
+       if (self.head==None):
+        self.head = np
+        self.tail = np
+       else:
+        temp = self.head
+        for i in range(pos-1):
+             temp = temp.next
+        temp.next = np.prev
+        temp.next = np
+
+    def del_at_beginn(self):
+       if self.head:
+         if self.head.next:
+           self.head.next.prev = None
+           self.head = self.head.next
+
+    def del_at_endd(self):
+      if self.tail:
+        if self.tail.next:
+          self.tail.prev.next = None
+          self.tail = self.tail.prev
+
+    def delete_at_position(self, position):
+      if self.head==None:
+            print("List is empty. Cannot delete.")
+      else:
+        temp = self.head
+        count = 1
+        while count < position and temp.next:
+            temp = temp.next
+            count += 1
+        if count < position:
+            print("Position out of range. Cannot delete.")
+            return
+        if temp.prev:
+            temp.prev.next = temp.next
+        else:
+            self.head = temp.next
+        if temp.next:
+            temp.next.prev = temp.prev
+
+    def counterr(self):
+        count = 0
+        if self.head == None:
+            print('Linkedlist is empty! hence zero elements')
+        else:
+            temp = self.head
+            while temp:
+                count+=1
+                temp = temp.next
+            return count
+
+    def reverse_list(self):
+      if self.head is None:
+        print("Doubly linked list is empty")
+      else:
+        current=self.head
+        temp=current.next
+        prev=None
+        while current:
+          current.next=prev
+          prev = current
+          current = temp
+          if (temp!=None):
+            temp=temp.next
+        self.head=prev
+        return prev
